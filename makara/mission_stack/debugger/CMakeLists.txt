@@ -2,7 +2,7 @@
 # CMake
 ##############################################################################
 
-cmake_minimum_required(VERSION 2.8.0)
+cmake_minimum_required(VERSION 2.8.3)
 project(debugger)
 add_definitions(-std=c++11)
 
@@ -11,52 +11,68 @@ add_definitions(-std=c++11)
 ##############################################################################
 
 # qt_build provides the qt cmake glue, roscpp the comms for a default talker
-find_package(catkin REQUIRED COMPONENTS 
+find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   genmsg
   qt_build
   roscpp
   roslib
-
+  
 )
-include_directories(${catkin_INCLUDE_DIRS})
-# Use this to define what the package will export (e.g. libs, headers).
-# Since the default here is to produce only a binary, we don't worry about
-# exporting anything. 
-catkin_package()
+find_package(OpenCV REQUIRED)
 
-##############################################################################
-# Qt Environment
-##############################################################################
-
-# this comes from qt_build's qt-ros.cmake which is automatically 
-# included via the dependency call in package.xml
-rosbuild_prepare_qt4(QtCore QtGui) # Add the appropriate components to the component list here
-
-##############################################################################
-# Sections
-##############################################################################
+find_package(Qt4 REQUIRED COMPONENTS
+  QtCore
+  QtGui
+)
 
 file(GLOB QT_FORMS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ui/*.ui)
-file(GLOB QT_RESOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} resources/*.qrc)
-file(GLOB_RECURSE QT_MOC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS include/debugger/mainwindow.hpp)
+set(QT_MOC 
+	include/debugger/mainwindow.h 
+        include/debugger/log_tools.h)
+SET(QT_SOURCES 
+	src/mainwindow.cpp )
 
-QT4_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
 QT4_WRAP_UI(QT_FORMS_HPP ${QT_FORMS})
 QT4_WRAP_CPP(QT_MOC_HPP ${QT_MOC})
 
-##############################################################################
-# Sources
-##############################################################################
+catkin_package(
+CATKIN_DEPENDS message_runtime
+)
 
-file(GLOB_RECURSE QT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS src/mainwindow.cpp)
+include(
+  ${QT_USE_FILE}
+)
+
+include_directories(
+include
+  ${OpenCV_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS}
+  ${QT_INCLUDE_DIRS}
+  ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+add_library(qt_lib ${QT_SOURCES} ${QT_FORMS_HPP} ${QT_MOC_HPP})
+target_link_libraries(qt_lib ${QT_LIBRARIES} ${catkin_LIBRARIES})
+
+add_library(debugger_lib include/debugger/mainwindow.h  src/mainwindow.cpp)
+target_link_libraries(debugger_lib qt_lib ${QT_LIBRARIES} ${catkin_LIBRARIES} )
+
+add_executable(debugger src/main.cpp)
+target_link_libraries(debugger debugger_lib ${QT_LIBRARIES} ${catkin_LIBRARIES})
+
+#add_library(tub_lib ${QT_SOURCES} ${QT_MOC})#include/tiburon_gui/mainwin.h  src/mainwin.cpp include/tiburon_gui/gate.h  src/gate.cpp)
+#target_link_libraries(tub_lib qt_lib ${OpenCV_LIBS})
 
 ##############################################################################
 # Binaries
 ##############################################################################
+#add_executable(debugger src/main.cpp)
+#target_link_libraries(debugger tub_lib ${catkin_LIBRARIES} ${OpenCV_LIBS})
+#install(TARGETS debugger RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-add_executable(debugger ${QT_SOURCES} ${QT_RESOURCES_CPP} ${QT_FORMS_HPP} ${QT_MOC_HPP})
-target_link_libraries(debugger ${QT_LIBRARIES} ${catkin_LIBRARIES})
-install(TARGETS debugger RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+#add_executable(debugger ${QT_SOURCES} ${QT_RESOURCES_CPP} ${QT_FORMS_HPP} ${QT_MOC_HPP})
+#target_link_libraries(debugger ${QT_LIBRARIES} ${catkin_LIBRARIES})
+#install(TARGETS debugger RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 

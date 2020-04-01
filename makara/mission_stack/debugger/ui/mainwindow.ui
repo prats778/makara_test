@@ -6,55 +6,88 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
-    <height>528</height>
+    <width>571</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:lightblue</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QComboBox" name="channel">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>130</y>
+      <y>200</y>
       <width>191</width>
       <height>22</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:lightgreen</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>synchronizer</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>vectornav</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>serialnode</string>
+     </property>
+    </item>
    </widget>
    <widget class="QTextBrowser" name="display">
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>90</y>
+      <y>170</y>
       <width>301</width>
-      <height>371</height>
+      <height>131</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:grey</string>
     </property>
    </widget>
    <widget class="QPushButton" name="clear">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>160</y>
+      <x>480</x>
+      <y>310</y>
       <width>80</width>
       <height>22</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
-     <string>clear</string>
+     <string>clear screen</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>23</x>
+      <x>160</x>
       <y>10</y>
-      <width>311</width>
-      <height>70</height>
+      <width>211</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:pink</string>
     </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -64,13 +97,33 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;DEBUGGER&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="textEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>80</y>
+      <width>471</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:gold</string>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;SHOWS THE AUV DEBUG STATMENTS OF FILES TO CHECK THEIR FUNCTIONING&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>601</width>
+     <width>571</width>
      <height>19</height>
     </rect>
    </property>

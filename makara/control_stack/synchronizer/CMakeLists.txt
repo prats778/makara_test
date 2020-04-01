@@ -10,6 +10,9 @@ project(synchronizer)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  debugger
+  serialnode
+  vectornav
    std_msgs genmsg
   message_generation
 )

@@ -10,6 +10,7 @@ project(vectornav)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  debugger
   std_msgs genmsg
   message_generation
 )
