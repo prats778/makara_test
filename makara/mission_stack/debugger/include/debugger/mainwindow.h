@@ -7,6 +7,7 @@
 #include <QString>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include <QProcess>
 
 
 namespace Ui {
@@ -31,6 +32,7 @@ public slots:
      void clear();   
 
 private:
+    QProcess *process=NULL;
     Ui::MainWindow *ui;
     std::string topic;
     ros::NodeHandle n;

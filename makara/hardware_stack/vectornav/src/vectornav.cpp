@@ -1,4 +1,4 @@
-#include<vectornav/vectornav.h>
+#include<vectornav/data.h>
 #include<ros/ros.h>
 #include <cstdlib>
 #include "/home/prats/catkin_ws/src/makara/mission_stack/debugger/include/debugger/log_tools.h"
@@ -6,8 +6,8 @@ int rand();
 int main(int argc,char** argv)
 {  ros::init(argc,argv,"vectornav"); ////initializing ros node
    ros::NodeHandle n;
-   ros::Publisher pub=n.advertise<vectornav::vectornav>("vectornav",1000);
-   vectornav::vectornav msg;
+   ros::Publisher pub=n.advertise<vectornav::data>("vectornav",1000);
+   vectornav::data msg;
    
         msg.acceleration.push_back((float)(rand()%10));
         msg.acceleration.push_back((float)(rand()%10));

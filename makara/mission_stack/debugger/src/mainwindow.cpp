@@ -17,6 +17,7 @@ MainWindow::MainWindow(ros::NodeHandle _nh,QWidget *parent) :
     ui(new Ui::MainWindow),n(_nh)
 {
     ui->setupUi(this);
+    process = new QProcess();
     connect(ui->channel, SIGNAL(currentIndexChanged(int)),this,SLOT(inp(int)));
     connect(ui->clear, SIGNAL(pressed()),this,SLOT(clear()));
     ROS_INFO("SLOTS CONNECTED");
@@ -50,10 +51,16 @@ MainWindow::~MainWindow()
    ROS_INFO(" ch is [%d]",ch);
   }
 void MainWindow::clear()
-{  int data=3; 
+{  /*int data=3; 
    ch=10;//ASSIGNING A ARBITRARY VALUE SO THAT NOTHING IS DISPLAYED
    ROS_INFO("OK");
-   ui->display->setText("hey there");
+   ui->display->setText("hey there");*/
+   if(ch==0)
+   process->start("rosrun synchronizer synchronizer");
+   if(ch==1)
+   process->start("rosrun vectornav vectornav");
+   if(ch==2)
+   process->start("rosrun serialnode serialnode");
    
 
 }
